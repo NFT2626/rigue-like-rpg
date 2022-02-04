@@ -1,3 +1,13 @@
+var config = {
+	type: Phaser.Auto,
+	width: 800,
+	height: 600,
+	physics: {
+		default: 'arcade',
+		arcade: {
+			gravity::w
+
+/*
 var canvas = document.getElementById("myCanvas");
 var ctx = canvas.getContext("2d");
 var ballRadius = 10;
@@ -86,3 +96,4 @@ function draw() {
 }
 
 setInterval(draw, 10);
+*/
