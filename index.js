@@ -1,138 +1,32 @@
 var config = {
-    type: Phaser.AUTO,
-    width: 800,
-    height: 600,
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 200 }
-        }
-    },
-    scene: {
-        preload: preload,
-        create: create
-    }
+	type: Phaser.AUTO,
+	width: 800,
+	height: 600,
+	scene: {
+		preload: preload,
+		create: create,
+		update: update
+	}
 };
 
 var game = new Phaser.Game(config);
 
 function preload ()
 {
-    this.load.setBaseURL('https://labs.phaser.io');
-
-    this.load.image('sky', 'assets/skies/space3.png');
-    this.load.image('logo', 'assets/sprites/phaser3-logo.png');
-    this.load.image('red', 'assets/particles/red.png');
+	this.load.image('dirt', 'img/dirt.png');
+	this.load.image('sky', 'assets/sky.png');
+	this.load.image('ground', 'assets/platform.png');
+	this.load.image('star', 'assets/star.png');
+	this.load.image('bomb', 'assets/bomb.png');
+	this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 }) 
 }
 
 function create ()
 {
-    this.add.image(400, 300, 'sky');
-
-    var particles = this.add.particles('red');
-
-    var emitter = particles.createEmitter({
-        speed: 100,
-        scale: { start: 1, end: 0 },
-        blendMode: 'ADD'
-    });
-
-    var logo = this.physics.add.image(400, 100, 'logo');
-
-    logo.setVelocity(100, 200);
-    logo.setBounce(1, 1);
-    logo.setCollideWorldBounds(true);
-
-    emitter.startFollow(logo);
+	//this.add.image(0, 0, 'dirt');
+	this.add.image(400, 300, 'sky');
 }
+function update ()
+{
 
-/*
-var canvas = document.getElementById("myCanvas");
-var ctx = canvas.getContext("2d");
-var ballRadius = 10;
-var x = canvas.width/2;
-var y = canvas.height-30;
-var dx = 2;
-var dy = -2;
-var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleX = (canvas.width-paddleWidth)/2;
-var rightPressed = false;
-var leftPressed = false;
-
-document.addEventListener("keydown", keyDownHandler, false);
-document.addEventListener("keyup", keyUpHandler, false);
-
-function keyDownHandler(e) {
-   if(e.key == "Right" || e.key == "ArrowRight") {
-      rightPressed = true;
-   }
-   else if(e.key == "Left" || e.key == "ArrowLeft") {
-      leftPressed = true;
-   }
 }
-
-function keyUpHandler(e) {
-   if(e.key == "Right" || e.key == "ArrowRight") {
-      rightPressed = false;
-   }
-   else if(e.key == "Left" || e.key == "ArrowLeft") {
-      leftPressed = false;
-   }
-}
-
-function drawBall() {
-   ctx.beginPath();
-   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-   ctx.fillStyle = "#0095DD";
-   ctx.fill();
-   ctx.closePath();
-}
-function drawPaddle() {
-   ctx.beginPath();
-   ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-   ctx.fillStyle = "#0095DD";
-   ctx.fill();
-   ctx.closePath();
-}
-
-function draw() {
-   ctx.clearRect(0, 0, canvas.width, canvas.height);
-   drawBall();
-   drawPaddle();
-
-   if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
-      dx = -dx;
-   }
-   if(y + dy < ballRadius) {
-      dy = -dy;
-   } else if(y + dy > canvas.height-ballRadius) {
-      if(x > paddleX && x < paddleX + paddleWidth) {
-         dy = -dy;
-      }
-      else {
-         alert("GAME OVER");
-         document.location.reload();
-         clearInterval(interval);
-      }
-   }
-
-   if(rightPressed) {
-      paddleX += 7;
-      if (paddleX + paddleWidth > canvas.width){
-         paddleX = canvas.width - paddleWidth;
-      }
-   }
-   else if(leftPressed) {
-      paddleX -= 7;
-      if (paddleX < 0){
-         paddleX = 0;
-      }
-   }
-
-   x += dx;
-   y += dy;
-}
-
-setInterval(draw, 10);
-*/
